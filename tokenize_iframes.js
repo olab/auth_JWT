@@ -32,8 +32,24 @@
         url.searchParams.delete('token')
       }
 
-      frame.src = url.toString()
-      frame.classList.add('__tokenized')
+      var copy = document.createElement('iframe')
+
+      frame.getAttributeNames().forEach(function(name)
+      {
+        copy.setAttribute(name, frame.getAttribute(name))
+      })
+
+      copy.classList.add('__tokenized')
+      copy.src = url.toString()
+
+      if ( 'replaceWith' in frame ) {
+        frame.replaceWith(copy)
+      } else {
+        frame.parentElement.appendChild(copy)
+        frame.remove()
+      }
+
+      delete frame
     })
   }).observe(document, {
     subtree: true,

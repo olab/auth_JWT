@@ -141,6 +141,7 @@ function local_jwt_auth_extend_navigation( global_navigation $nav )
     $PAGE->requires->js(new moodle_url('/local/jwt_auth/tokenize_iframes.js', [
         'hosts' => join(',', TOKENIZE_IFRAMES_WITH_HOST),
         'regexpr' => base64_encode('(^|\s)' . preg_quote(OLAB_AUTH_JWT_COOKIE_NAME) . '=([^;|$]+)'),
+        'ver' => '0.1',
     ]), true);
 }
 
